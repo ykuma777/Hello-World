@@ -1,0 +1,33 @@
+{
+  "name": "PyTorch GPU DevContainer",
+  "image": "continuumio/anaconda3:latest",   // 自動生成ならこのままでOK
+
+  // 🟢 GPUを使えるようにする
+  "runArgs": [
+    "--gpus", "all",
+    "--ipc=host",
+    "--ulimit", "memlock=-1",
+    "--ulimit", "stack=67108864"
+  ],
+  "containerEnv": {
+    "NVIDIA_VISIBLE_DEVICES": "all",
+    "NVIDIA_DRIVER_CAPABILITIES": "compute,utility"
+  },
+
+  // 🟢 SSH鍵をマウント（GitHubアクセス用）
+  "mounts": [
+    "source=${env:USERPROFILE}/.ssh,target=/root/.ssh,type=bind"
+  ],
+
+  // 🟢 JupyterやPython関連拡張を有効化
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-toolsai.jupyter",
+        "ms-python.python",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers"
+      ]
+    }
+  }
+}

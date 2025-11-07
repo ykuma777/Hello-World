@@ -5,3 +5,4 @@
 
 こんにちは赤ちゃん。
 
+"Hello from Windows $(date)" 
